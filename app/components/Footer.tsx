@@ -43,6 +43,9 @@ const Footer = () => {
           <div className="pb-12 pt-2 text-sm font-light">
             © 2026 Discipulus Ventures <br />
             All Rights Reserved. <br />
+            <Link href="/cookies" className="hover:underline opacity-60 hover:opacity-100 transition-opacity">
+              Cookie Policy
+            </Link>
             <div className="mt-4" />
           </div>
         </div>
