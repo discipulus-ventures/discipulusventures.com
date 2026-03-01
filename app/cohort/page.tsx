@@ -23,10 +23,13 @@ const CohortComponent: React.FC = () => {
       <div className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <AudioVideoEmbed
-            src="/videos/2026_Spring.mp4"
+            src="/videos/2026_Spring_web.mp4"
+            poster="/videos/2026_Spring_poster.jpg"
             title="Spring 2026 Cohort"
             className="w-full"
             loop={true}
+            width={1920}
+            height={1440}
           />
         </div>
       </div>

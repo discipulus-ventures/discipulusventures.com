@@ -4,16 +4,24 @@ import React, { useState, useRef, useEffect } from 'react';
 
 interface AudioVideoEmbedProps {
   src: string;
+  webmSrc?: string;
+  poster?: string;
   title?: string;
   className?: string;
   loop?: boolean;
+  width?: number;
+  height?: number;
 }
 
 const AudioVideoEmbed: React.FC<AudioVideoEmbedProps> = ({
   src,
+  webmSrc,
+  poster,
   title = 'Video',
   className = '',
-  loop = true
+  loop = true,
+  width,
+  height,
 }) => {
   const [isMuted, setIsMuted] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -27,7 +35,9 @@ const AudioVideoEmbed: React.FC<AudioVideoEmbedProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && videoRef.current) {
-          videoRef.current.play();
+          videoRef.current.play().catch(() => {
+            setIsPlaying(false);
+          });
           setIsPlaying(true);
         } else if (videoRef.current) {
           videoRef.current.pause();
@@ -80,13 +90,16 @@ const AudioVideoEmbed: React.FC<AudioVideoEmbedProps> = ({
     >
       <video
         ref={videoRef}
-        src={src}
+        src={webmSrc ?? src}
         title={title}
         className="w-full h-auto rounded-lg"
         muted={true}
         loop={loop}
         preload="metadata"
         playsInline
+        poster={poster}
+        width={width}
+        height={height}
       />
       
       {/* Audio Control Overlay - Only show on hover */}
